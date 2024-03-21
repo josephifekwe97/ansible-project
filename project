@@ -1,4 +1,4 @@
-<!-- This is going to be a simple project where we are going to set up jenkins controller in a server and two slave/agent in two different servers using Ansible -->
+<!-- This is going to be a simple project where we are going to set up apache2  in three slave/agent in three different servers using Ansible -->
 
 <!-- My name is Rubben, and am going to be your intructor on this project. So let begin -->
 
