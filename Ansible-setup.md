@@ -16,8 +16,6 @@ The Ansible Controller is the machine where we install Ansible to run commands a
 
 Ansible Inventory: This file contains information about our servers (hosts), including IP addresses or domain names and connection details. The inventory file uses INI format and groups servers based on their roles. Here's an example:
 
-graphql
-Copy code
 [database_servers]
 ipnx@172.31.28.157
 ubuntu@172.31.28.157
@@ -27,6 +25,8 @@ web_app@172.31.26.237
 ipnx@172.31.28.157
 ubuntu@172.31.28.157
 web_app@172.31.26.237
+
+
 Ansible Playbook: This file contains the tasks that Ansible will execute on the host machines. It is written in YAML format, which uses key-value pairs and lists.
 
 Setting Up the Hosts
@@ -39,31 +39,22 @@ Launch Instances: Spin up 5 instances on AWS—one as the controller and four as
 
 Create Project Directory: On the controller, create a directory named 'ansible-project' and inside it, create the inventory and playbook files:
 
-bash
-Copy code
 mkdir ansible-project
 cd ansible-project
 touch hosts playbook.yml
-Install Ansible: On the controller machine, run:
 
-bash
-Copy code
+Install Ansible: On the controller machine, run:
 sudo apt update
 sudo apt install software-properties-common
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ansible --version
 Create Inventory File: Navigate to the 'ansible-project' directory and create the inventory file:
-
-bash
-Copy code
 nano hosts
+
 Add server information in the file.
 
 Generate SSH Keys: On the controller machine, generate an SSH key:
-
-bash
-Copy code
 ssh-keygen
 Copy the public key to the authorized_keys file on each host machine.
 
@@ -78,15 +69,12 @@ ubuntu@172.31.28.157
 [db_servers]
 ubuntu@172.31.26.249
 ubuntu@172.31.26.248
-Test Connections: Run the following command to test the connections:
 
-bash
-Copy code
+Test Connections: Run the following command to test the connections:
 ansible all -m ping -i hosts
+
 Write the Ansible Playbook: Open the playbook file and write the tasks for installing Apache2 and MySQL:
 
-yaml
-Copy code
 ---
 - name: Play 1
   hosts: web_servers
@@ -123,14 +111,10 @@ Copy code
         enabled: yes
 Check Syntax and Run Playbook: Verify the playbook syntax:
 
-bash
-Copy code
 ansible-playbook --syntax-check playbook.yml
 If there are no errors, deploy the playbook:
 
-bash
-Copy code
 ansible-playbook -i hosts playbook.yml
-Conclusion
 
+Conclusion
 This project guides you through provisioning Apache2 and MySQL on remote servers using Ansible. Follow the steps carefully to ensure successful setup and deployment. Thank you and keep learning!
